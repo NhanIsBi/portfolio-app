@@ -1,0 +1,58 @@
+<div *ngIf="isOpen()" class="fixed inset-0 z-[100] flex items-start justify-center pt-[20vh] px-4">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" (click)="isOpen.set(false)"></div>
+
+  <!-- Palette Container -->
+  <div class="relative w-full max-w-xl bg-[#1e1e1e] border border-glass-border rounded-xl shadow-2xl overflow-hidden animate-fade-in-down">
+    
+    <!-- Search Input -->
+    <div class="flex items-center px-4 py-3 border-b border-white/10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary-2 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input 
+        #searchInput
+        type="text" 
+        placeholder="Type a command or search..." 
+        class="w-full bg-transparent text-white placeholder-secondary-2 focus:outline-none text-lg"
+        [value]="searchQuery()"
+        (input)="onSearch($event)"
+      >
+      <span class="text-xs text-secondary-2 px-2 py-1 bg-white/10 rounded">ESC</span>
+    </div>
+
+    <!-- Results List -->
+    <div class="max-h-[300px] overflow-y-auto py-2 custom-scrollbar">
+      <div *ngIf="filteredCommands().length === 0" class="px-4 py-3 text-secondary-2 text-center">
+        No results found.
+      </div>
+
+      <button 
+        *ngFor="let cmd of filteredCommands(); let i = index"
+        (click)="executeCommand(cmd)"
+        (mouseenter)="selectedIndex.set(i)"
+        [class.bg-primary-1]="i === selectedIndex()"
+        [class.text-black]="i === selectedIndex()"
+        [class.text-secondary-1]="i !== selectedIndex()"
+        class="w-full px-4 py-3 flex items-center justify-between transition-colors text-left"
+      >
+        <div class="flex items-center">
+          <span class="mr-3 text-xl">{{ cmd.icon }}</span>
+          <span class="font-medium">{{ cmd.title }}</span>
+        </div>
+        <span *ngIf="cmd.shortcut" class="text-xs opacity-60 font-mono border border-current rounded px-1.5 py-0.5">
+          {{ cmd.shortcut }}
+        </span>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-4 py-2 bg-white/5 border-t border-white/10 flex justify-between items-center text-xs text-secondary-2">
+      <div class="flex gap-2">
+        <span><kbd class="font-sans">↑</kbd> <kbd class="font-sans">↓</kbd> to navigate</span>
+        <span><kbd class="font-sans">↵</kbd> to select</span>
+      </div>
+      <span>Powered by Angular Signals</span>
+    </div>
+  </div>
+</div>

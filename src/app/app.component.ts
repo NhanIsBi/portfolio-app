@@ -7,6 +7,7 @@ import { ExperienceComponent } from './components/experience/experience.componen
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { CommandPaletteComponent } from './components/command-palette/command-palette.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { ContactComponent } from './components/contact/contact.component';
     ExperienceComponent,
     ProjectsComponent,
     SkillsComponent,
-    ContactComponent
+    ContactComponent,
+    CommandPaletteComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SpotlightDirective } from '../../directives/spotlight.directive';
 
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpotlightDirective],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })
