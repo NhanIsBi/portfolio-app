@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Theme Variables */
+  --primary-1: #00E676; /* Neon Green from CV/Nature */
+  --primary-2: #69F0AE; /* Lighter Green */
+  
+  --secondary-1: #ffffff; /* White text */
+  --secondary-2: rgba(255, 255, 255, 0.7); /* Muted text */
+  
+  --bg-dark: #0a0a0a; /* Deep Black */
+  --bg-surface: #1a1a1a; /* Dark Grey Surface */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+
+  --font-main: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--secondary-1);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-1);
+  outline-offset: 4px;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-1);
+  border-radius: 4px;
+}
+
+/* Glassmorphism Utility Class */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.text-gradient {
+
+  background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+
+
+@keyframes fadeInUp {
+
+  from {
+
+    opacity: 0;
+
+    transform: translate3d(0, 40px, 0);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
+
+  }
+
+}
+
+
+
+@keyframes fadeInDown {
+
+  from {
+
+    opacity: 0;
+
+    transform: translate3d(0, -40px, 0);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translate3d(0, 0, 0);
+
+  }
+
+}
+
+
+
+.animate-fade-in-up {
+
+  animation-name: fadeInUp;
+
+  animation-duration: 0.8s;
+
+  animation-fill-mode: both;
+
+}
+
+
+
+.animate-fade-in-down {
+
+  animation-name: fadeInDown;
+
+  animation-duration: 0.5s;
+
+  animation-fill-mode: both;
+
+}

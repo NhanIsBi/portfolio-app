@@ -1,0 +1,63 @@
+<div class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+  <!-- 3D Background Container -->
+  <div #rendererContainer class="absolute inset-0 z-0 opacity-40"></div>
+
+  <!-- Content -->
+  <div class="container mx-auto px-4 z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <!-- Text Content -->
+      <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+        <h2 class="text-primary-1 font-mono mb-4 text-lg animate-fade-in-up" style="animation-delay: 0.1s;">
+          &lt; Hello, I'm /&gt;
+        </h2>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight animate-fade-in-up" style="animation-delay: 0.2s;">
+          <span class="text-white">Lê Trần</span> <br />
+          <span class="text-gradient">Thái Nhân</span>
+        </h1>
+        <h3 class="text-xl md:text-3xl text-secondary-2 mb-8 font-light animate-fade-in-up" style="animation-delay: 0.3s;">
+          Expert in <span class="text-white border-b border-primary-1">Angular</span> & <span class="text-white border-b border-primary-1">Modern UI</span>
+        </h3>
+        
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s;">
+          <a href="#projects" class="px-8 py-4 bg-primary-1 text-black font-bold rounded-xl hover:bg-primary-2 transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.3)] pointer-events-auto">
+            Explore Projects
+          </a>
+          <a href="Le_Tran_Thai_Nhan_CV.pdf" target="_blank" class="px-8 py-4 glass-panel border border-primary-1/30 text-primary-1 font-bold rounded-xl hover:bg-primary-1/10 transition-all transform hover:scale-105 pointer-events-auto flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download CV
+          </a>
+        </div>
+      </div>
+
+      <!-- Image Content (Apple Style) -->
+      <div class="flex-1 order-1 lg:order-2 animate-fade-in-up" style="animation-delay: 0.4s;">
+        <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
+          <!-- Decorative Rings -->
+          <div class="absolute inset-0 border-2 border-primary-1/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+          <div class="absolute inset-4 border border-white/10 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+          
+          <!-- Image Container -->
+          <div class="absolute inset-8 rounded-full overflow-hidden border-4 border-glass-border shadow-2xl z-10">
+            <img src="profile.jpg" alt="Lê Trần Thái Nhân" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Floating Badges -->
+          <div class="absolute top-0 -right-4 bg-glass-panel backdrop-blur-md p-3 rounded-2xl border border-glass-border shadow-lg animate-bounce z-20 hidden md:block" style="animation-duration: 4s;">
+             <span class="text-primary-1 font-bold">3+ Years Exp</span>
+          </div>
+          <div class="absolute bottom-10 -left-8 bg-glass-panel backdrop-blur-md p-3 rounded-2xl border border-glass-border shadow-lg animate-bounce z-20 hidden md:block" style="animation-duration: 5s;">
+             <span class="text-white font-bold">Angular Specialist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10 flex flex-col items-center">
+    <span class="text-xs text-secondary-2 uppercase tracking-widest mb-2">Scroll</span>
+    <div class="w-[1px] h-12 bg-gradient-to-b from-primary-1 to-transparent"></div>
+  </div>
+</div>
