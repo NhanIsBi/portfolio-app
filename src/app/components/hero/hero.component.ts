@@ -28,12 +28,12 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initThree();
       this.animate();
-      window.addEventListener('resize', this.onWindowResize.bind(this));
-      window.addEventListener('mousemove', this.onMouseMove.bind(this));
+      window.addEventListener('resize', this.onWindowResize);
+      window.addEventListener('mousemove', this.onMouseMove);
     }
   }
 
-  onMouseMove(event: MouseEvent) {
+  onMouseMove = (event: MouseEvent) => {
     this.mouseX = (event.clientX - window.innerWidth / 2) / 100;
     this.mouseY = (event.clientY - window.innerHeight / 2) / 100;
   }
@@ -47,7 +47,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     this.camera.position.z = 5;
 
-    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.rendererContainer.nativeElement.appendChild(this.renderer.domElement);
@@ -96,6 +96,8 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   animate() {
+    if (!this.renderer || !this.scene || !this.camera) return;
+
     this.animationId = requestAnimationFrame(() => this.animate());
 
     this.targetX = this.mouseX * 0.5;
@@ -117,7 +119,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   onWindowResize = () => {
-    if (!this.rendererContainer) return;
+    if (!this.rendererContainer || !this.camera || !this.renderer) return;
     const width = this.rendererContainer.nativeElement.clientWidth;
     const height = this.rendererContainer.nativeElement.clientHeight;
     this.camera.aspect = width / height;
@@ -129,9 +131,28 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       window.removeEventListener('resize', this.onWindowResize);
       window.removeEventListener('mousemove', this.onMouseMove);
+      
       cancelAnimationFrame(this.animationId);
+      
+      // Dispose of resources
+      if (this.scene) {
+        this.scene.traverse((object) => {
+          if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
+            object.geometry.dispose();
+            if (Array.isArray(object.material)) {
+              object.material.forEach(m => m.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        });
+      }
+
       if (this.renderer) {
         this.renderer.dispose();
+        if (this.renderer.domElement && this.renderer.domElement.parentNode) {
+           this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
+        }
       }
     }
   }
